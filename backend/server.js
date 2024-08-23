@@ -11,7 +11,7 @@ const port = 3001;
 
 app.use(cookieParser());
 app.use(bodyParser());
-//app.use(cors())
+app.use(cors())
 app.use('/',require('./routes/router'))
 
 app.listen(port, () => {

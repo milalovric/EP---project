@@ -8,11 +8,11 @@ const controller = require('../controller/user');
 // User routes
 route.post('/api/users', controller.create);
 route.post('/login', controller.login);
-/*route.get('/api/users', controller.find);
+route.get('/api/users', controller.find);
 route.get('/api/users/:id', controller.findOne);
 route.put('/api/users/:id', controller.update);
 route.delete('/api/users/:id', controller.delete);
-route.post('/forgetPassword', controller.forgetPassword);
+/*route.post('/forgetPassword', controller.forgetPassword);
 route.put('/resetPassword',authenticateToken, controller.resetPassword);*/
 
 

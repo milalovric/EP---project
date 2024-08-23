@@ -127,7 +127,7 @@ exports.authenticateToken = (req, res, next) => {
 };
 
 
-/*exports.find = (req, res) => {
+exports.find = (req, res) => {
     const searchQuery = req.query.search; 
 
     if (searchQuery) {
@@ -234,7 +234,7 @@ exports.delete = (req, res)=>{
             });
         });
 }
-exports.forgetPassword = (req, res) => {
+/*exports.forgetPassword = (req, res) => {
     const { email } = req.body;
     User.findOne({ email })
         .then(user => {
