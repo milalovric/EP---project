@@ -234,7 +234,7 @@ exports.delete = (req, res)=>{
             });
         });
 }
-/*exports.forgetPassword = (req, res) => {
+exports.forgetPassword = (req, res) => {
     const { email } = req.body;
     User.findOne({ email })
         .then(user => {
@@ -292,4 +292,4 @@ exports.resetPassword = async (req, res) => {
         console.error("Error resetting password", error);
         res.status(500).send({ message: "Error resetting password" });
     }
-};*/
+};
