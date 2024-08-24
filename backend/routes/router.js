@@ -1,7 +1,7 @@
 const express = require('express');
 const route = express.Router();
 const controller = require('../controller/user');
-//const controllers = require('../controller/task');
+const controllers = require('../controller/task');
 //const controllerss = require('../controller/myTask');
 const { authenticateToken } = require('../controller/user'); 
 
@@ -17,12 +17,12 @@ route.put('/resetPassword',authenticateToken, controller.resetPassword);
 
 
 // Task routes
-/*route.post('/task', controllers.create);
+route.post('/task', controllers.create);
 route.get('/task', controllers.find);
 route.put('/task/:id', controllers.update);
 route.delete('/task/:id', controllers.delete);
 
-route.post('/myTask', controllerss.create); 
+/*route.post('/myTask', controllerss.create); 
 route.get('/myTask', controllerss.find);
 route.put('/myTask/:id', controllerss.update); 
 route.delete('/myTask/:id', controllerss.delete);*/
