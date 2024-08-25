@@ -23,12 +23,12 @@ var schema = new mongoose.Schema({
     }
 });
 
-/*schema.pre('save', function(next) {
+schema.pre('save', function(next) {
     if (this.status === 'Active' && this.deadline && this.deadline < new Date()) {
         this.status = 'Expired';
     }
     next();
-});*/
+});
 
 const myTask = mongoose.model('myTask', schema);
 
