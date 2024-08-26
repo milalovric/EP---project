@@ -9,9 +9,9 @@ import { IoMdClose } from "react-icons/io";
 import { CiCalendar, CiClock1 } from "react-icons/ci";
 import { FaTasks } from "react-icons/fa";
 import {RiGroupLine, RiUser3Line } from "react-icons/ri";
-
-
 import axios from 'axios';
+import socket from '../task/socket';
+
 const Tasks = () => {
     const [currentTask, setCurrentTask] = useState(null);
     const [tasks, setTasks] = useState([]);
@@ -54,6 +54,19 @@ const Tasks = () => {
             fetchTasks();
         }
     }, [username, searchQuery]);
+
+    useEffect(() => {
+        // Listen for notifications
+        socket.on('receiveNotification', (data) => {
+            console.log('Notification received:', data);
+            fetchTasks(); // Refresh tasks when a notification is received
+        });
+
+        // Clean up the event listener on component unmount
+        return () => {
+            socket.off('receiveNotification');
+        };
+    }, []);
     
     const fetchTasks = async () => {
         try {

@@ -5,10 +5,13 @@ import React, { useState, useEffect } from 'react';
 import { CgProfile, CgLogOut } from 'react-icons/cg';
 import { FaTasks } from 'react-icons/fa';
 import Link from 'next/link';
+import io from 'socket.io-client';
 
 export default function Sidebar() {
   const router = useRouter();
   const [userData, setUserData] = useState(null);
+  const [notificationCount, setNotificationCount] = useState(0);
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -26,6 +29,27 @@ export default function Sidebar() {
     fetchUserData();
   }, []);
 
+  useEffect(() => {
+    const socket = io('http://localhost:3001'); // Adjust the URL if necessary
+
+    socket.on('connect', () => {
+      console.log('Connected to socket server');
+    });
+
+    socket.on('disconnect', () => {
+      console.log('Disconnected from socket server');
+    });
+
+    socket.on('receiveNotification', (data) => {
+      console.log('Notification received:', data);
+      setNotificationCount(prevCount => prevCount + 1);
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
   const handleLogout = () => {
     setUserData(null);
 
@@ -34,7 +58,6 @@ export default function Sidebar() {
     localStorage.removeItem('userId');
     router.push('/');
   };
-
 
   return (
     <div>
@@ -68,6 +91,12 @@ export default function Sidebar() {
                   <h3 className="text-base text-blue-900 group-hover:text-white font-semibold">My Tasks</h3>
                 </div>
               </Link>
+              <div className="flex mb-2 justify-start items-center gap-4 pl-5 hover:bg-blue-700 p-2 rounded-md group cursor-pointer hover:shadow-lg">
+                <span className="text-2xl text-blue-700 group-hover:text-white">🔔</span>
+                <h3 className="text-base text-blue-900 group-hover:text-white font-semibold">
+                  Notifications: {notificationCount}
+                </h3>
+              </div>
             </div>
             <div className="absolute bottom-5 left-13 flex items-center justify-center">
               <div

@@ -10,6 +10,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import { toast, Toaster } from 'react-hot-toast';
 
+
 const schema = yup.object().shape({
   email: yup
     .string()
